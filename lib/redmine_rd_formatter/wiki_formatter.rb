@@ -19,7 +19,8 @@ module RedmineRDFormatter
     end
     def to_html(&block)
       visitor = RestrictedHTMLVisitor.new
-      src = @text.split(/^/)
+      text = @text.gsub(/^> /, ' > ')
+      src = text.split(/^/)
       if src.find{|i| /\S/ === i } and !src.find{|i| /^=begin\b/ === i }
         src.unshift("=begin\n").push("=end\n")
       end
